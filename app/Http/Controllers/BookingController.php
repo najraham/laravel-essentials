@@ -58,11 +58,11 @@ class BookingController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Booking  $booking
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function show(Booking $booking)
     {
-        //
+        return view('bookings.show', ['booking' => $booking]);
     }
 
     /**
@@ -73,7 +73,10 @@ class BookingController extends Controller
      */
     public function edit(Booking $booking)
     {
-        //
+        $users = DB::table('users')->get()->pluck('name', 'id')->prepend('none');
+        $rooms = DB::table('rooms')->get()->pluck('number', 'id');
+        $booking =
+        return view('bookings.edit')->with('users', $users)->with('rooms', $rooms)->with('booking', $booking);
     }
 
     /**
